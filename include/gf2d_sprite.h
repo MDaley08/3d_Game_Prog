@@ -163,4 +163,11 @@ void gf3d_sprite_reset_pipes();
 void gf3d_sprite_submit_pipe_commands();
 
 
+/**
+ * @brief checks if mouse is colliding with sprite object
+ * @return sprite in question
+ */
+void gf2d_sprite_collison();
+
+
 #endif

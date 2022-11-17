@@ -1,0 +1,7 @@
+{
+    "model":
+    {
+        "model":"models/arena_sky/sky.obj",
+        "texture":"models/arena_sky/sky.jpeg"
+    }
+}

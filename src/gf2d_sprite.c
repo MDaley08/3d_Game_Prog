@@ -7,6 +7,7 @@
 #include "gf3d_vgraphics.h"
 #include "gf3d_pipeline.h"
 #include "gf3d_commands.h"
+#include "gf2d_mouse.h"
 #include "gf2d_sprite.h"
 
 #define SPRITE_ATTRIBUTE_COUNT 2
@@ -218,7 +219,12 @@ Sprite * gf2d_sprite_from_surface(SDL_Surface *surface,int frame_width,int frame
     gf2d_sprite_create_vertex_buffer(sprite);
     return sprite;
 }
+/*
+void gf2d_sprite_collison(){
+    gf2d_
 
+}
+*/
 Sprite * gf2d_sprite_load_image(const char * filename)
 {
     return gf2d_sprite_load(filename,0,0, 1);

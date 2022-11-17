@@ -1,0 +1,7 @@
+{
+    "model":
+    {
+        "model":"models/arena/arena.obj",
+        "texture":"models/arena/arena.png"
+    }
+}

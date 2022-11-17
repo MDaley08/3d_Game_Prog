@@ -15,6 +15,7 @@ World *world_load(char *filename)
     SJson *json,*wjson;
     World *w = NULL;
     Vector3D skyScale = {1,1,1};
+    Vector3D skyPosition = {1,1,1};
     const char *modelName = NULL;
     w = gfc_allocate_array(sizeof(World),1);
     if (w == NULL)
@@ -56,6 +57,7 @@ World *world_load(char *filename)
         w->sky = gf3d_model_load(modelName);
     }
     sj_value_as_vector3d(sj_object_get_value(wjson,"skyScale"),&skyScale);
+    sj_value_as_vector3d(sj_object_get_value(wjson,"skyPosition"),&skyPosition);
     sj_value_as_vector3d(sj_object_get_value(wjson,"scale"),&w->scale);
     sj_value_as_vector3d(sj_object_get_value(wjson,"position"),&w->position);
     sj_value_as_vector3d(sj_object_get_value(wjson,"rotation"),&w->rotation);
@@ -65,6 +67,7 @@ World *world_load(char *filename)
     w->color = gfc_color(1,1,1,1);
     gfc_matrix_identity(w->skyMat);
     gfc_matrix_scale(w->skyMat,skyScale);
+    gfc_matrix_make_translation(w->skyMat,skyPosition);
     gf3d_lights_set_global_light(globalColor,vector4d(globalDir.x,globalDir.y,globalDir.z,1));
     return w;
 }
@@ -86,7 +89,6 @@ void world_delete(World *world)
 
 void world_run_updates(World *self)
 {
-    self->rotation.z += 0.0001;
     gfc_matrix_identity(self->modelMat);
     
     gfc_matrix_scale(self->modelMat,self->scale);
