@@ -4,13 +4,14 @@
 #include "entity.h"
 
 typedef enum {
-    HUMAN = 0,
-    FAIRY,
+    DRAGON,
     UNDEAD,
-    TROLL,
-    ELF
+    GOLEM,
+    SENTINEL,
+    MERMAID
 }MonsterType;
 
-Entity *monster_new(Vector3D position,Vector3D rotation);
+Entity *monster_new(char *filename, MonsterType type, Vector3D position,Vector3D rotation);
+
 
 #endif

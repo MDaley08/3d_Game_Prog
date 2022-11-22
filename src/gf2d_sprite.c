@@ -333,12 +333,13 @@ void gf2d_sprite_draw_full(
 void gf2d_sprite_draw_simple(
     Sprite   * sprite,
     Vector2D   position,
+    Vector2D   scale,
     Uint32     frame)
 {
     gf2d_sprite_draw(
         sprite,
         position,
-        NULL,
+        &scale,
         NULL,
         NULL,
         NULL,

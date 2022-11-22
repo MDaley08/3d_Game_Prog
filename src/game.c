@@ -29,6 +29,7 @@
 #include "world.h"
 #include "ui.h"
 #include "monster.h"
+#include "combat.h"
 
 extern int __DEBUG;
 
@@ -95,8 +96,13 @@ int main(int argc,char *argv[])
     SDL_SetRelativeMouseMode(SDL_TRUE);
     slog_sync();
     gf3d_camera_set_scale(vector3d(1,1,1));
-    player = player_new(vector3d(0,0,.9),vector3d(M_PI,0,M_PI/2));
-    monster  = monster_new(vector3d(-50,0,.9),vector3d(M_PI,0,M_PI/2));
+    player = player_new(vector3d(0,0,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",UNDEAD,vector3d(-50,0,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",GOLEM,vector3d(-50,20,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",DRAGON,vector3d(-50,40,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",MERMAID,vector3d(-50,-20,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",SENTINEL,vector3d(-50,-40,1.5),vector3d(M_PI,0,M_PI/2));
+    
     
     // main game loop
     slog("gf3d main loop begin");
@@ -113,6 +119,11 @@ int main(int argc,char *argv[])
         entity_collison_check_all();
         gf3d_camera_update_view();
         gf3d_camera_get_view_mat4(gf3d_vgraphics_get_view_matrix());
+        /*
+        if(player->in_combat == 1){
+            combat(player,player->enemy);
+        }
+        */
 
         gf3d_vgraphics_render_start();
 

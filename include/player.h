@@ -10,7 +10,4 @@
  */
 Entity *player_new(Vector3D position,Vector3D rotation);
 
-void player_draw(Entity *self);
-
-
 #endif

@@ -132,11 +132,13 @@ void gf2d_sprite_draw_full(
  * @brief draw a sprite to the screen
  * @param sprite the sprite to draw
  * @param position here on the screen to draw it
+ * * @param scale scale the sprite (1,1) for no scale
  * @param frame which frame to draw
  */
 void gf2d_sprite_draw_simple(
     Sprite   * sprite,
     Vector2D   position,
+    Vector2D   scale,
     Uint32     frame);
 
 /**

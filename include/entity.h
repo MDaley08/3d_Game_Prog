@@ -6,7 +6,6 @@
 #include "gfc_primitives.h"
 
 #include "gf3d_model.h"
-#include "spell.h"
 
 typedef enum
 {
@@ -15,6 +14,7 @@ typedef enum
     ES_dead,
     ES_attack
 }EntityState;
+
 
 typedef struct Entity_S
 {
@@ -25,6 +25,7 @@ typedef struct Entity_S
     Uint8       hidden;     /**<if true, not drawn*/
     Uint8       selected;
     Color       selectedColor;      /**<Color for highlighting*/
+    char        *name;
     
     Sphere      bounds; // for collisions
     int         team;  //same team dont clip
@@ -41,17 +42,17 @@ typedef struct Entity_S
     EntityState state;
     
     
-    Vector3D    velocity;
-    Vector3D    acceleration;
-            
-    Uint32      health;     /**<entity dies when it reaches zero*/
-    Uint32      mana;       // used to cast spells
-    Uint32      max_health; // maximum health entity can have
-    Uint32      max_mana;   // maximum mana entity can have
-    Uint8       in_combat;  // flag that is set if entity is in combat
+    Vector3D        velocity;
+    Vector3D        acceleration;
+
+    Uint32          health;     /**<entity dies when it reaches zero*/
+    Uint32          mana;       // used to cast spells
+    Uint32          max_health; // maximum health entity can have
+    Uint32          max_mana;   // maximum mana entity can have
+    Uint8           in_combat;  // flag that is set if entity is in combat
     //SpellSchool school;     // school of the entity,
     // WHATEVER ELSE WE MIGHT NEED FOR ENTITIES
-    struct Entity_S *target;    /**<entity to target for weapons / ai*/
+    struct Entity_S *enemy;    /**<entity to target for weapons / ai*/
     
     void *data;   /**<IF an entity needs to keep track of extra data, we can do it here*/
 }Entity;
