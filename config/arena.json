@@ -1,0 +1,14 @@
+{
+    "world":
+    {
+        "model":"models/arena.model",
+        "sky":"models/arena_sky.model",
+        "skyScale":[0.25,0.25,0.25],
+        "skyPosition":[0,0,2000],
+        "position":[0,0,2000],
+        "scale":[1.8,1.8,1.8],
+        "rotation":[0,0,0],
+        "lightColor":[1,1,1,1],
+        "lightDir":[-1,-1,0]
+    }
+}

@@ -25,9 +25,11 @@
 #include "gf2d_windows_common.h"
 
 #include "entity.h"
-#include "station.h"
 #include "player.h"
 #include "world.h"
+#include "ui.h"
+#include "monster.h"
+#include "combat.h"
 
 extern int __DEBUG;
 
@@ -60,6 +62,9 @@ int main(int argc,char *argv[])
 {
     int a;
     World *w;
+    World *arena;
+    Entity *player;
+    Entity *monster;
 
     for (a = 1; a < argc;a++)
     {
@@ -86,12 +91,18 @@ int main(int argc,char *argv[])
     
         
     w = world_load("config/testworld.json");
+    arena = world_load("config/arena.json");
     
     SDL_SetRelativeMouseMode(SDL_TRUE);
     slog_sync();
     gf3d_camera_set_scale(vector3d(1,1,1));
-    player_new(vector3d(-7.390132,10.103416,4.000000),vector3d(3.556602,0.000000,-2.365007));
-    station_new(vector3d(0,0,0));
+    player = player_new(vector3d(0,0,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",UNDEAD,vector3d(-50,0,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",GOLEM,vector3d(-50,20,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",DRAGON,vector3d(-50,40,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",MERMAID,vector3d(-50,-20,1.5),vector3d(M_PI,0,M_PI/2));
+    monster_new("config/monster.json",SENTINEL,vector3d(-50,-40,1.5),vector3d(M_PI,0,M_PI/2));
+    
     
     // main game loop
     slog("gf3d main loop begin");
@@ -102,16 +113,26 @@ int main(int argc,char *argv[])
         gf2d_font_update();
         gf2d_windows_update_all();
         world_run_updates(w);
+        world_run_updates(arena);
         entity_think_all();
         entity_update_all();
+        entity_collison_check_all();
         gf3d_camera_update_view();
         gf3d_camera_get_view_mat4(gf3d_vgraphics_get_view_matrix());
+        /*
+        if(player->in_combat == 1){
+            combat(player,player->enemy);
+        }
+        */
 
         gf3d_vgraphics_render_start();
 
             //3D draws
                 world_draw(w);
+                world_draw(arena);
                 entity_draw_all();
+                ui_draw(player);
+
                 //2D draws
                 gf2d_windows_draw_all();
                 gf2d_mouse_draw();

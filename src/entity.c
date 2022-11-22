@@ -148,4 +148,35 @@ void entity_update_all()
     }
 }
 
+void entity_collison_check(Entity *ent)
+{
+    int i;
+    Sphere bound1, bound2;
+
+    if (!ent) return;
+    bound1 = ent->bounds;
+    for (i = 0; i < entity_manager.entity_count; i++)
+    {
+        if ((!entity_manager.entity_list[i]._inuse) || (&entity_manager.entity_list[i] == ent)) continue; // entity not used, skip iteration of loop or entity is itself
+        bound2 = entity_manager.entity_list[i].bounds;
+        if (gfc_sphere_overlap(bound1, bound2)){
+            if (ent->collison)
+            {
+                ent->collison(ent, &entity_manager.entity_list[i]);
+            }
+        }
+    }
+
+
+    
+}
+void entity_collison_check_all()
+{
+    int i;
+    for (i = 0; i < entity_manager.entity_count; i++)
+    {
+        if (!entity_manager.entity_list[i]._inuse)continue; //entity not used, skip iteration of loop
+        entity_collison_check(&entity_manager.entity_list[i]);
+    }
+}
 /*eol@eof*/

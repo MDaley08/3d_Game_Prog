@@ -10,5 +10,4 @@
  */
 Entity *player_new(Vector3D position,Vector3D rotation);
 
-
 #endif

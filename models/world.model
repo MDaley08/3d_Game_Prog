@@ -1,0 +1,7 @@
+{
+    "model":
+    {
+        "model":"models/world/world.obj",
+        "texture":"models/world/world.jpg"
+    }
+}

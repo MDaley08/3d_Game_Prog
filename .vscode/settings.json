@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "spell.h": "c",
+        "entity.h": "c",
+        "ui.h": "c",
+        "time.h": "c"
+    }
+}

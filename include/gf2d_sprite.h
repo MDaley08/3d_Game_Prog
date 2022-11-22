@@ -132,11 +132,13 @@ void gf2d_sprite_draw_full(
  * @brief draw a sprite to the screen
  * @param sprite the sprite to draw
  * @param position here on the screen to draw it
+ * * @param scale scale the sprite (1,1) for no scale
  * @param frame which frame to draw
  */
 void gf2d_sprite_draw_simple(
     Sprite   * sprite,
     Vector2D   position,
+    Vector2D   scale,
     Uint32     frame);
 
 /**
@@ -161,6 +163,13 @@ void gf3d_sprite_reset_pipes();
  * @brief called to submit all draw commands to the sprite pipelines
  */
 void gf3d_sprite_submit_pipe_commands();
+
+
+/**
+ * @brief checks if mouse is colliding with sprite object
+ * @return sprite in question
+ */
+void gf2d_sprite_collison();
 
 
 #endif

@@ -1,0 +1,59 @@
+ {
+    "dragon":
+    {
+        "name": "Dragon",
+        "school": 0,
+        "model":"models/monster.model",
+        "color":[255,0,0,255],
+        "max_health": 500,
+        "max_mana" : 100,
+        "health": 500,
+        "mana": 100
+    },
+
+    "mermaid":
+    {
+        "name": "mermaid",
+        "school": 1,
+        "model":"models/monster.model",
+        "color":[0,0,255,255],
+        "max_health": 400,
+        "max_mana" : 250,
+        "health": 400,
+        "mana": 250
+    },
+    "golem":
+    {
+        "name": "Golem",
+        "school": 2,
+        "model":"models/monster.model",
+        "color":[0,255,0,255],
+        "max_health": 800,
+        "max_mana" : 100,
+        "health": 800,
+        "mana": 100
+    },
+    "sentinel":
+    {
+        "name": "Sentinel",
+        "school": 3,
+        "model":"models/monster.model",
+        "color":[255,255,255,255],
+        "max_health": 650,
+        "max_mana" : 150,
+        "health": 650,
+        "mana": 150
+    },
+    "undead":
+    {
+        "name": "Undead",
+        "school": 4,
+        "model":"models/monster.model",
+        "color":[0,0,0,255],
+        "max_health": 400,
+        "max_mana" : 200,
+        "health": 400,
+        "mana": 200
+    }
+
+}
