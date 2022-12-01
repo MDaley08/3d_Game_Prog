@@ -66,6 +66,7 @@ Entity *monster_new(char *filename, MonsterType type, Vector3D position,Vector3D
     sj_get_integer_value(sj_object_get_value(mjson,"health"),&ent->health); 
     sj_get_integer_value(sj_object_get_value(mjson,"max_mana"),&ent->max_mana);//load from json
     sj_get_integer_value(sj_object_get_value(mjson,"mana"),&ent->mana);//load from json
+    sj_get_integer_value(sj_object_get_value(mjson,"school"),&ent->school);//load from json
 
     gf3d_model_mat_set_position(&ent->mat,position);
     gf3d_model_mat_set_rotation(&ent->mat,rotation);

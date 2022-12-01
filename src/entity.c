@@ -166,9 +166,6 @@ void entity_collison_check(Entity *ent)
             }
         }
     }
-
-
-    
 }
 void entity_collison_check_all()
 {

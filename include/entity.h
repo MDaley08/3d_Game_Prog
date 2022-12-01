@@ -15,6 +15,16 @@ typedef enum
     ES_attack
 }EntityState;
 
+typedef enum 
+{
+    FIRE_SCHOOL = 0,
+    WATER_SCHOOL,
+    EARTH_SCHOOL,
+    LIGHT_SCHOOL,
+    DARK_SCHOOL,
+
+}EntitySchool;
+
 
 typedef struct Entity_S
 {
@@ -45,11 +55,13 @@ typedef struct Entity_S
     Vector3D        velocity;
     Vector3D        acceleration;
 
-    Uint32          health;     /**<entity dies when it reaches zero*/
+    EntitySchool    school;
+    int          health;     /**<entity dies when it reaches zero*/
     Uint32          mana;       // used to cast spells
     Uint32          max_health; // maximum health entity can have
     Uint32          max_mana;   // maximum mana entity can have
     Uint8           in_combat;  // flag that is set if entity is in combat
+    Uint8           ent_turn;
     //SpellSchool school;     // school of the entity,
     // WHATEVER ELSE WE MIGHT NEED FOR ENTITIES
     struct Entity_S *enemy;    /**<entity to target for weapons / ai*/

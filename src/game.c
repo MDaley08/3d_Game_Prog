@@ -81,7 +81,7 @@ int main(int argc,char *argv[])
     gfc_audio_init(256,16,4,1,1,1);
     gf2d_font_init("config/font.cfg");
     gf3d_draw_init();//3D
-    gf2d_draw_manager_init(1000);//2D
+    gf2d_draw_manager_init(10000);//2D
     gf2d_actor_init(1024);
     gf2d_windows_init(128,"config/windows.cfg");
     gf2d_mouse_load("actors/mouse.actor");
@@ -119,30 +119,30 @@ int main(int argc,char *argv[])
         entity_collison_check_all();
         gf3d_camera_update_view();
         gf3d_camera_get_view_mat4(gf3d_vgraphics_get_view_matrix());
-        /*
-        if(player->in_combat == 1){
-            combat(player,player->enemy);
-        }
-        */
 
+
+    
+        
         gf3d_vgraphics_render_start();
 
             //3D draws
+                
                 world_draw(w);
                 world_draw(arena);
                 entity_draw_all();
                 ui_draw(player);
-
+                if(player->in_combat)combat(player);
                 //2D draws
                 gf2d_windows_draw_all();
                 gf2d_mouse_draw();
-
+                //if(player->in_combat)combat(player);
         gf3d_vgraphics_render_end();
 
         if ((gfc_input_command_down("exit"))&&(_quit == NULL))
         {
             exitCheck();
         }
+        
     }    
     
     world_delete(w);

@@ -38,6 +38,7 @@ Entity *player_new(Vector3D position,Vector3D rotation)
     ent->max_mana = 500;
     ent->mana = 500;
     ent->color = gfc_color(0,95,157,220);
+    ent->school = EARTH_SCHOOL;
 
     gf3d_model_mat_set_position(&ent->mat,position);
     gf3d_model_mat_set_rotation(&ent->mat,rotation);
@@ -141,7 +142,6 @@ void player_update(Entity *self)
 }
 
 void player_collison(Entity *self, Entity *other){
-    //combat(self,other);
     other->in_combat = 1;
     self->enemy = other;
 }

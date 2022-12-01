@@ -3,6 +3,7 @@
         "spell.h": "c",
         "entity.h": "c",
         "ui.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "gf2d_mouse.h": "c"
     }
 }
