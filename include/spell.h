@@ -24,8 +24,9 @@ typedef struct Spell_S {
     SpellSchool school;
     SpellType   type;
     Sprite      cardSprite;
-    void        (*spell)(struct Entity_S *self);
+    void        (*spell)(struct Entity_S *caster);
 }Spell;
+
 Spell *spell_new();
 void *fireball(Entity *enemy); // casts a fireball does x damage - fire
 void *burn(Entity *enemy); // damages enemy for x over 3 rounds - fire

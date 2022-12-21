@@ -1,5 +1,10 @@
 #include "simple_logger.h"
+
+#include "gfc_audio.h"
 #include "gfc_types.h"
+#include "gfc_input.h"
+
+#include "gf2d_mouse.h"
 
 #include "gf3d_vgraphics.h"
 #include "gf3d_camera.h"
@@ -7,7 +12,6 @@
 #include "gf3d_particle.h"
 #include "gf3d_draw.h"
 
-#include "gf2d_mouse.h"
 #include "combat.h"
 #include "player.h"
 
@@ -15,9 +19,13 @@ void player_think(Entity *self);
 void player_update(Entity *self);
 void player_collison(Entity *self, Entity *other);
 
+Sound *collision_sound;
+
 Entity *player_new(Vector3D position,Vector3D rotation)
 {
     Entity *ent = NULL;
+    
+    int test = 1;
     
     ent = entity_new();
     if (!ent)
@@ -25,7 +33,7 @@ Entity *player_new(Vector3D position,Vector3D rotation)
         slog("UGH OHHHH, no player for you!");
         return NULL;
     }
-    
+    ent->type = PLAYER;
     ent->think = player_think;
     ent->update = player_update;
     ent->model = gf3d_model_load("models/player.model");
@@ -42,6 +50,8 @@ Entity *player_new(Vector3D position,Vector3D rotation)
 
     gf3d_model_mat_set_position(&ent->mat,position);
     gf3d_model_mat_set_rotation(&ent->mat,rotation);
+    collision_sound = gfc_sound_load("music/collision_sound.wav",1.0,-1);
+
 
     ent->hidden = 0;
     return ent;
@@ -81,12 +91,17 @@ void player_think(Entity *self)
         {
             gf3d_model_mat_move(&self->mat,vector3d(-right.x,-right.y,-right.z));
         }
-        if (keys[SDL_SCANCODE_O])
+        
+        if (keys[SDL_SCANCODE_F])
         {
-            slog("position: %f,%f,%f",self->mat.position.x,self->mat.position.y,self->mat.position.z);
-            slog("rotation: %f,%f,%f",self->mat.rotation.x,self->mat.rotation.y,self->mat.rotation.z);
+            self->shop = 1;
+        }
+        if (keys[SDL_SCANCODE_X])
+        {
+            self->shop = 0;
         }
     }
+
 
         if (keys[SDL_SCANCODE_G])    
         {
@@ -139,11 +154,27 @@ void player_update(Entity *self)
         gf3d_camera_set_position(combat_position);
         gf3d_camera_set_rotation(combat_rotation);
     }
+    if(self->health <= 0) self->health = 0;
+    if(self->health >= self->max_health) self->health = self->max_health;
+    if(self->mana <= 0) self->mana = 0;
+    if(self->mana >= self->max_mana) self->mana = self->max_mana;
+    self->interacting = 0;
+    self->colliding = 0;
+
 }
 
+
+
 void player_collison(Entity *self, Entity *other){
-    other->in_combat = 1;
-    self->enemy = other;
+    self->colliding = 1;
+    if(other->type == MONSTER){// initiates combat if entity collided with is a monster
+        other->in_combat = 1;
+        self->enemy = other;
+        gfc_sound_play(collision_sound,0,0.5,-1,-1);
+        slot_init();
+    }
+    if(other->type == INSTRUCTOR){
+    }
 }
 
 

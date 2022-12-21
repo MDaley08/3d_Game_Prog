@@ -2,6 +2,9 @@
 #define __PLAYER_H__
 
 #include "entity.h"
+#include "spell.h"
+
+//Spell *deck[20];
 
 /**
  * @brief Create a new player entity

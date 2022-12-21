@@ -9,6 +9,8 @@
 extern int combat_round;
 extern Uint8 turn;
 
+void slot_init();
+void slot_close();
 void combat(Entity *player);
 
 //Spell *spell_new();

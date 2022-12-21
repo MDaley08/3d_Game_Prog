@@ -2,6 +2,7 @@
 #define __MONSTER_H__
 
 #include "entity.h"
+//Spell *deck[20];
 
 typedef enum {
     DRAGON,

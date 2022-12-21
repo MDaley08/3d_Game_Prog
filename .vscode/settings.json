@@ -4,6 +4,10 @@
         "entity.h": "c",
         "ui.h": "c",
         "time.h": "c",
-        "gf2d_mouse.h": "c"
+        "gf2d_mouse.h": "c",
+        "combat.h": "c",
+        "player.h": "c",
+        "gf3d_lights.h": "c",
+        "gfc_audio.h": "c"
     }
 }

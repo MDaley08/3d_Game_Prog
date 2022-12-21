@@ -25,6 +25,13 @@ typedef enum
 
 }EntitySchool;
 
+typedef enum 
+{
+    PLAYER = 0,
+    MONSTER,
+    INSTRUCTOR
+}EntityType;
+
 
 typedef struct Entity_S
 {
@@ -56,13 +63,15 @@ typedef struct Entity_S
     Vector3D        acceleration;
 
     EntitySchool    school;
-    int          health;     /**<entity dies when it reaches zero*/
+    EntityType      type;
+    Uint32          health;     /**<entity dies when it reaches zero*/
     Uint32          mana;       // used to cast spells
     Uint32          max_health; // maximum health entity can have
     Uint32          max_mana;   // maximum mana entity can have
     Uint8           in_combat;  // flag that is set if entity is in combat
-    Uint8           ent_turn;
-    //SpellSchool school;     // school of the entity,
+    Uint8           interacting; //flag set if entity is interacting with another entity.
+    Uint8           shop; //flag set if entity is interacting with another entity.
+    Uint8           colliding; //flag set if entity is interacting with another entity.
     // WHATEVER ELSE WE MIGHT NEED FOR ENTITIES
     struct Entity_S *enemy;    /**<entity to target for weapons / ai*/
     

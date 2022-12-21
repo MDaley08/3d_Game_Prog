@@ -29,6 +29,7 @@
 #include "world.h"
 #include "ui.h"
 #include "monster.h"
+#include "instructor.h"
 #include "combat.h"
 
 extern int __DEBUG;
@@ -65,6 +66,8 @@ int main(int argc,char *argv[])
     World *arena;
     Entity *player;
     Entity *monster;
+    Sound *combat_music;
+
 
     for (a = 1; a < argc;a++)
     {
@@ -102,8 +105,10 @@ int main(int argc,char *argv[])
     monster_new("config/monster.json",DRAGON,vector3d(-50,40,1.5),vector3d(M_PI,0,M_PI/2));
     monster_new("config/monster.json",MERMAID,vector3d(-50,-20,1.5),vector3d(M_PI,0,M_PI/2));
     monster_new("config/monster.json",SENTINEL,vector3d(-50,-40,1.5),vector3d(M_PI,0,M_PI/2));
-    
-    
+    instructor_new(vector3d(-140,0,1.5),vector3d(M_PI,0,M_PI/2));
+
+    combat_music = gfc_sound_load("music/combat_music.wav",1.0,-1);
+
     // main game loop
     slog("gf3d main loop begin");
     while(!_done)
@@ -130,18 +135,24 @@ int main(int argc,char *argv[])
                 world_draw(w);
                 world_draw(arena);
                 entity_draw_all();
-                ui_draw(player);
-                if(player->in_combat)combat(player);
                 //2D draws
+                ui_draw(player);
+                if(player->in_combat){
+                    combat(player);
+                    gfc_sound_play(combat_music,0,0.5,-1,-1); 
+                }
+
                 gf2d_windows_draw_all();
                 gf2d_mouse_draw();
+                
+                
+                
+
                 //if(player->in_combat)combat(player);
         gf3d_vgraphics_render_end();
 
-        if ((gfc_input_command_down("exit"))&&(_quit == NULL))
-        {
-            exitCheck();
-        }
+        if (gfc_input_command_down("exit")) exitGame();
+
         
     }    
     

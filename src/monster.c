@@ -54,6 +54,7 @@ Entity *monster_new(char *filename, MonsterType type, Vector3D position,Vector3D
     }
 
     ent->name = sj_get_string_value(sj_object_get_value(mjson,"name"));
+    ent->type = MONSTER;
     ent->think = monster_think; //load from json(we will keep as monster for now, later each monster will have own think function)
     ent->update = monster_update; //load from json
     ent->model = gf3d_model_load(sj_get_string_value(sj_object_get_value(mjson,"model")));//defaulting to cube, later each will have unique model
@@ -89,11 +90,19 @@ void monster_update(Entity *self)
         self->mat.position.x = -12;
         self->mat.position.y = 0;
     }
+    //hard coding min and maxes for mana. need to adjust later
+    if(self->health <= 0) self->health = 0;
+    if(self->health >= self->max_health) self->health = self->max_health;
+    if(self->mana <= 0) self->mana = 0;
+    if(self->mana >= self->max_mana) self->mana = self->max_mana;
+    
 }
 
 void monster_collison(Entity *self, Entity *other){
-    other->in_combat = 1;
-    self->enemy = other;
+    if(other->type == PLAYER){// initiates combat if eneity collided with is a player
+        other->in_combat = 1;
+        self->enemy = other;
+    }
 }
 
 /*eol@eof*/
